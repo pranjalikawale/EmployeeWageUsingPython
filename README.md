@@ -1,1 +1,2 @@
 "# EmployeeWageUsingPython" 
+"# GamblingProblem" 
