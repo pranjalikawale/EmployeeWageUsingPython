@@ -1,54 +1,70 @@
 import math
 import random
 
-#welcome msg
-print("----Welcome To Employee Wage Problem----")
+class EmployWageComputation:
 
-#declare constant
-IS_FULL_TIME=1
-IS_PART_TIME=2
-EMP_RATE_HRS=20
-WORKING_DAY=20
-WORKING_HOURS=100
+    #welcome msg
+    print("----Welcome To Employee Wage Problem----")
 
-#declare variable for employeeWage
-empWage=0
-totalWorkingDay=0
-totalWorkingHrs=0
+    #declare constant
+    IS_FULL_TIME=1
+    IS_PART_TIME=2
 
-#return fulltime employee working hrs
-def isFullTime():
-    return 8
+    #declare class variable
+    #empRate, numberOfDays, numberOfHrs
 
-#return parttime employee working hrs
-def isPartTime():
-    return 4    
+    #initialize class variable
+    def __init__(self,empRate,numberOfDays,numberOfHrs):
+        self.empRate=empRate
+        self.numberOfDays=numberOfDays
+        self.numberOfHrs=numberOfHrs    
 
-#return zero employee working hrs
-def isAbsent():
-    return 0
+    #return fulltime employee working hrs
+    def isFullTime(self):
+        return 8
 
-#ckeck for employee working hrs
-switcher={
-    0:isAbsent,
-    1:isFullTime,
-    2:isPartTime,
-}
+    #return parttime employee working hrs
+    def isPartTime(self):
+        return 4    
 
-#calculate mothly employee wage
-while totalWorkingHrs<WORKING_HOURS and totalWorkingDay<WORKING_DAY:
-    #declare variable for attendence
-    attendence=math.floor(random.random()*10)%3
+    #return zero employee working hrs
+    def isAbsent(self):
+        return 0
 
-    # Get the function from switcher dictionary
-    func=switcher.get(attendence)
+    switcher={
+        0:isAbsent,
+        1:isFullTime,
+        2:isPartTime,
+    }
+
+    #ckeck for employee working hrs
+    def getHour():
+        #declare variable for attendence
+        attendence=math.floor(random.random()*10)%3
+
+        # Get the function from switcher dictionary
+        func=switcher.get(attendence)
+        return func
+
+
+    #return daily empWage
+    def getDailyWage(self,hrs):
+      return (hrs*self.empRate)
     
-       
-    totalWorkingHrs=totalWorkingHrs+func()
-    totalWorkingDay+=1
+    #compute employ wage
+    def computeEmployeeWage():
+        totalWorkingDay=0
+        totalWorkingHrs=0 
+        hours=0
+        #calculate mothly employee wage
+        while totalWorkingHrs<self.numberOfHrs  and totalWorkingDay<self.numberOfDays:
+            hours=getHour()
+            totalWorkingHrs=totalWorkingHrs+hours
+            totalWorkingDay+=1
+            print(("Employ Wage for day {0} : {1}").format(totalWorkingDay,getDailyWage(hours)))
+        #print employee wage    
+        print("Employ Wage for month : {0} ".format(getDailyWage(totalWorkingHrs)))
 
-#calculate employee wage
-empWage=totalWorkingHrs*EMP_RATE_HRS
-
-#print employee wage
-print("Employ Wage for month: {0}".format(empWage))
+#main
+employee=EmployWageComputation(20,20,100)
+employee.computeEmployeeWage()
