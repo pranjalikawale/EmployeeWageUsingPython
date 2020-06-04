@@ -1,5 +1,6 @@
 import math
 import random
+from company_detail import CompanyDetail
 
 class EmployWageComputation:
 
@@ -12,13 +13,6 @@ class EmployWageComputation:
 
     #declare variable
     total_wage=0
-
-    #initialize class variable
-    def __init__(self,company_name,emp_rate,number_of_days,number_of_hrs):
-        self.company=company_name
-        self.emp_rate=emp_rate
-        self.number_of_days=number_of_days
-        self.number_of_hrs=number_of_hrs    
 
     #return fulltime employee working hrs
     def is_full_time(self):
@@ -48,27 +42,26 @@ class EmployWageComputation:
         func=self.switcher.get(self,attendence)
         return func
 
-
     #return daily empWage
-    def get_daily_wage(self,hrs):
-      return (hrs*self.emp_rate)
+    def get_daily_wage(self,hrs,emp_rate):
+      return (hrs*emp_rate)
     
     #compute employ wage
-    def compute_employee_wage(self):
-        total_working_day=0
-        total_Working_hrs=0 
-        hours=0
+    def compute_employee_wage(self,company_list):
+        for company in company_list:
+            total_working_day=0
+            total_Working_hrs=0 
+            hours=0
+            employ_rate=company.get_emp_rate()
+            #calculate daily employee wage
+            while total_Working_hrs<company.get_number_of_hrs() and total_working_day<company.get_number_of_days():
+                hours=self.get_hour()
+                total_Working_hrs+=hours
+                total_working_day+=1
+                print(("{0} Employ Wage for day {1} : {2}").format(company.get_company_name(),total_working_day,self.get_daily_wage(hours,employ_rate)))
+            #calculate mothly employee wage
+            self.total_wage=self.get_daily_wage(total_Working_hrs,employ_rate)
+            print("{0} Employ Wage for month : {1} \n".format(company.get_company_name(),self.total_wage))
 
-        #calculate daily employee wage
-        while total_Working_hrs<self.number_of_hrs  and total_working_day<self.number_of_days:
-            hours=self.get_hour()
-            total_Working_hrs+=hours
-            total_working_day+=1
-            print(("{0} Employ Wage for day {1} : {2}").format(self.company,total_working_day,self.get_daily_wage(hours)))
-        #calculate mothly employee wage
-        self.total_wage=self.get_daily_wage(total_Working_hrs)
 
-    #print monthly employee wage 
-    def total_employee_wage(self):
-        print("{0} Employ Wage for month : {1} \n".format(self.company,self.total_wage))
-
+        

@@ -1,10 +1,11 @@
 from employee_wage import EmployWageComputation
+from company_detail import CompanyDetail
 
-class EmployeeWageBuilderObject():
-    tcs=EmployWageComputation("TCS",20,20,100)
-    jio=EmployWageComputation("JIO",20,20,100)
-    tcs.compute_employee_wage()
-    tcs.total_employee_wage()
-    jio.compute_employee_wage()
-    jio.total_employee_wage()
+class EmployeeWageBuilderObject:
+    company=[]
+    company.append(CompanyDetail("TCS",20,20,100))
+    company.append(CompanyDetail("JIO",20,20,100))
+    employee=EmployWageComputation()
+    employee.compute_employee_wage(company)
+    employee.compute_employee_wage(company)
     
