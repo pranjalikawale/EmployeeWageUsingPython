@@ -52,18 +52,18 @@ class EmployWageComputation:
     #compute employ wage
     def compute_employee_wage(self):
         total_working_day=0
-        total_Working_hrs=0 
+        total_working_hrs=0 
         hours=0
 
         #calculate mothly employee wage
-        while total_Working_hrs<self.number_of_hrs  and total_working_day<self.number_of_days:
+        while total_working_hrs<self.number_of_hrs  and total_working_day<self.number_of_days:
             hours=self.get_hour()
-            total_Working_hrs+=hours
+            total_working_hrs+=hours
             total_working_day+=1
             print(("Employ Wage for day {0} : {1}").format(total_working_day,self.get_daily_wage(hours)))
 
         #print employee wage    
-        print("Employ Wage for month : {0} ".format(self.get_daily_wage(total_Working_hrs)))
+        print("Employ Wage for month : {0} ".format(self.get_daily_wage(total_working_hrs)))
 
 #main
 employee=EmployWageComputation(20,20,100)
